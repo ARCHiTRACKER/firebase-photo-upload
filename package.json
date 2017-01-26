@@ -1,0 +1,17 @@
+{
+  "name": "firebase-photos-uploader",
+  "version": "1.0.0",
+  "description": "Upload photos directly to firebase and get a pulic URL",
+  "main": "index.js",
+  "scripts": {
+    "upload": "node index.js >> output.csv"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "file-api": "^0.10.4",
+    "firebase": "^3.6.7",
+    "google-cloud": "^0.45.2",
+    "recursive-readdir": "^2.1.0"
+  }
+}
