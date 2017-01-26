@@ -1,4 +1,4 @@
-# Firebase upload
+# Firebase photo upload
 
 ### This script require `Node.js` in order to run
 
