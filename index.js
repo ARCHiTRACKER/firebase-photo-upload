@@ -1,7 +1,7 @@
 // node component import
 const gcloud = require('google-cloud');
 var recursive = require('recursive-readdir');
-
+var uploadToFirebase = require('./toFirebase');
 
 const storage = gcloud.storage({
     projectId: 'architracker-1484317434204',
@@ -20,12 +20,21 @@ bucket.exists(function(err, exists) {
             files.map(function (filePath) {
                 var fileName = filePath.split('/');
                 fileName = fileName[fileName.length-1];
+                var projectCode = filePath.split('/')[1];
 
                     // upload file
                 bucket.upload(filePath, {destination: filePath, public: true}, function (err, file) {
                     if (!err) {
                         var public_path = 'https://storage.googleapis.com/architracker-1484317434204.appspot.com/' + filePath;
-                        console.log(fileName+","+public_path);
+
+                        var photo = {
+                            'projectCode': projectCode,
+                            'url': public_path,
+                            'credit': ''
+                        }
+
+                        var firebaseId = uploadToFirebase(photo);
+                        console.log('"'+firebaseId+'","'+projectCode+'","'+public_path+'",""')
                     }
                 });
             });
