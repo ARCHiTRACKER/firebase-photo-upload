@@ -8,11 +8,19 @@ admin.initializeApp({
 });
 
 var db = admin.database();
-var photosRef = db.ref("photos");
 
-function uploadToFirebase(photo) {
-  var photoRef = photosRef.push(photo);
-  return photoRef.key;
+function createUnder(parentRef, data) {
+  var parentRef = db.ref(parentRef);
+  var itemRef = parentRef.push(data);
+  return itemRef.key;
 }
 
-module.exports = uploadToFirebase;
+function setAt(location, data) {
+	var itemRef = db.ref(location).set(data);
+	return itemRef.key;
+}
+
+module.exports = {
+	'createUnder': createUnder,
+	'setAt': setAt
+}
