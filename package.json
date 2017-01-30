@@ -11,6 +11,7 @@
   "dependencies": {
     "file-api": "^0.10.4",
     "firebase": "^3.6.7",
+    "firebase-admin": "^4.0.6",
     "google-cloud": "^0.45.2",
     "recursive-readdir": "^2.1.0"
   }

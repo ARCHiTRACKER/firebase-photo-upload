@@ -7,3 +7,4 @@ ARCHiTRACKER-e877c8b07a42.json
 # IDE
 .idea
 .idea/*
+node_modules/
