@@ -1,7 +1,7 @@
 // node component import
 const gcloud = require('google-cloud');
 var recursive = require('recursive-readdir');
-var firebase = require('./toFirebase');
+var toFirebase = require('./toFirebase');
 
 const storage = gcloud.storage({
     projectId: 'architracker-1484317434204',
@@ -33,7 +33,7 @@ bucket.exists(function(err, exists) {
                             'credit': ''
                         }
 
-                        var firebaseId = uploadToFirebase('photos', photo);
+                        var firebaseId = toFirebase.createUnder('photos', photo);
                         console.log('"'+firebaseId+'","'+projectCode+'","'+public_path+'",""')
                     }
                 });

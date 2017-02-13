@@ -11,11 +11,27 @@ var outputFile = 'architectures-firebase.json';
 fs.createReadStream('architectures-input.csv')
   .pipe(csv())
   .on('data', function (data) {
-    var ref;
+
+    var assets = data.assets_photos.split('\n');
+    data.assets_photos = {};
+    for (var i = assets.length - 1; i >= 0; i--) {
+      var asset = assets[i];
+      if (asset.length !== 0) {
+        data.assets_photos[asset] = true;
+      }
+    }
+
+    var isLive = (data.is_live == 'true');
+    data.is_live = isLive;
+
+    // var ref = Math.random().toString(36).replace(/[^a-z]+/g, '') ;
     if (!data.firebase_id) {
+      delete data.firebase_id;
       ref = firebase.createUnder('architecture_profiles', data)  
     } else {
-      ref = firebase.setAt('architecture_profiles/'+data.firebase_id, data)
+      var firebase_id = data.firebase_id
+      delete data.firebase_id;
+      ref = firebase.setAt('architecture_profiles/'+firebase_id, data)
     }
 
     var clone = Object.assign({}, data);
